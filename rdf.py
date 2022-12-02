@@ -19,12 +19,19 @@ class rdf_module:
         for stmt in self.g:
             print(stmt)
 
-    def activate_reasoner(self):
+    def activate_reasoner(self, reasoner):
+        # -- TODO: Allow the user to pick the reasoner.
+        self.reasoner = reasoner
+
+        print(self.reasoner)
+
         # -- load ontology with deductive closure - RDFS only
         owlrl.DeductiveClosure(owlrl.RDFS_Semantics).expand(self.g)
 
         # -- load ontology with deductive closure - OWL2-RL + RDFS
         # owlrl.DeductiveClosure(owlrl.RDFS_OWLRL_Semantics).expand(g)
 
-    def export_graph(self):
+    def export_graph(self, export_type):
+        self.export_type = export_type
+        # -- TODO: Allow the user to pick the export file.
         self.g.serialize(format="turtle", destination="export/export.ttl")

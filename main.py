@@ -1,4 +1,5 @@
 from click_shell import shell
+import click
 from rdf import rdf_module
 
 # @click.group()  # no longer
@@ -17,12 +18,14 @@ def printontology():
 
 @my_app.command()
 def activatereasoner():
-    rdf.activate_reasoner()
+    reasoner = input("Enter reasoner:")
+    rdf.activate_reasoner(reasoner)
     print("Reasoner activated.")
 
 @my_app.command()
 def exportgraph():
-    rdf.export_graph()
+    export_type = input("Enter export type:")
+    rdf.export_graph(export_type)
 
 if __name__ == '__main__':
     rdf = rdf_module()
