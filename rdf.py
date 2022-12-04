@@ -2,6 +2,7 @@ from rdflib import Graph, URIRef, BNode, Literal
 from rdflib.namespace import FOAF, RDF
 import pprint
 import owlrl
+import os
 
 class rdf_module:
 
@@ -30,6 +31,21 @@ class rdf_module:
 
         # -- load ontology with deductive closure - OWL2-RL + RDFS
         # owlrl.DeductiveClosure(owlrl.RDFS_OWLRL_Semantics).expand(g)
+
+    def show_queries(self):
+        # -- QUERIES
+        for query in os.listdir('input/query'):
+            print(query)
+
+    def execute_query(self):
+        # -- QUERIES
+        for query in os.listdir('input/query'):
+            q = open('input/query/' + query).read()
+            result = self.g.query(q)
+            print("--- "+query+" ---")
+            for row in result:
+                print(row)
+
 
     def export_graph(self, export_type):
         self.export_type = export_type

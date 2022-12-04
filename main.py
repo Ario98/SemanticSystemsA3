@@ -23,6 +23,15 @@ def activatereasoner():
     print("Reasoner activated.")
 
 @my_app.command()
+def showqueries():
+    rdf.show_queries()
+    print("Showing query.")
+
+@my_app.command()
+def executequeries():
+    rdf.execute_query()
+
+@my_app.command()
 def exportgraph():
     export_type = input("Enter export type:")
     rdf.export_graph(export_type)
