@@ -40,18 +40,17 @@ def addproperty(domain, property, range):
     print('Property {} added.'.format(property))
 
 @my_app.command()
-@click.argument('objectname', type=str)
+@click.argument('objectname',  type=str)
 @click.argument('instancename', type=str)
 def addinstance(objectname, instancename):
-    # Fix
     rdf.add_instance(objectname, instancename)
-    print('Instance {} added.'.format(instancename))
+    print('Added {} instance.'.format(instancename))
 
 @my_app.command()
 def showqueries():
     print('Showing available queries:')
     rdf.show_queries()
-    print("Call the function executequery with your chosen query to execute it. Example: executequery 1.")
+    print("Call the function executequery with your chosen query to execute it. Example: executequery 1")
 
 @my_app.command()
 @click.argument('querychoice', type=int)

@@ -92,26 +92,18 @@ class rdf_module:
         self.g.add((self.URIname, RDFS.label, Literal(self.name)))
 
     def add_property(self, domain, property, range):
-        # TODO: Fix
-        self.domain = domain
-        self.property = property
-        self.range = range
+        propertyURI = URIRef("http://semantics.id/ns/example/film#" + property)
+        domain = URIRef("http://semantics.id/ns/example/film#" + domain)
+        range = URIRef("http://semantics.id/ns/example/film#" + range)
 
-        self.URIdomain = URIRef("http://semantics.id/ns/example/film#" + self.domain)
-        self.URIproperty = URIRef("http://semantics.id/ns/example/film#" + self.property)
-        self.URIrange = URIRef("http://semantics.id/ns/example/film#" + self.range)
-
-        self.g.add((self.URIproperty, RDF.type ,OWL.ObjectProperty))
-        self.g.add((self.URIproperty, RDFS.label, Literal(self.property)))
-        self.g.add((self.URIproperty, RDFS.domain, self.domain))
-        self.g.add((self.URIproperty, RDFS.range, self.range))
+        self.g.add((propertyURI, RDF.type ,OWL.ObjectProperty))
+        self.g.add((propertyURI, RDFS.label, Literal(property)))
+        self.g.add((propertyURI, RDFS.domain, domain))
+        self.g.add((propertyURI, RDFS.range, range))
 
     def add_instance(self, objectName, instanceName):
-        self.objectName = objectName
-        self.instanceName = instanceName
+        URIobject = URIRef("http://semantics.id/ns/example#" + objectName)
+        URIname = URIRef("http://semantics.id/ns/example/film#fullName")
 
-        self.URIobjectName = URIRef("http://semantics.id/ns/example#" + self.objectName)
-        self.URIinstanceName = URIRef("http://semantics.id/ns/example/film#fullName")
-
-        self.g.add((self.URIobjectName, RDF.type, OWL.NamedIndividual))
-        self.g.add((self.URIobjectName, self.instanceName, Literal(self.URIinstanceName)))
+        self.g.add((URIobject, RDF.type, OWL.NamedIndividual))
+        self.g.add((URIobject, URIname, Literal(instanceName)))
