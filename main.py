@@ -2,10 +2,25 @@ from click_shell import shell
 import click
 from rdf import rdf_module
 
-# @click.group()  # no longer
-@shell(prompt='my-app > ', intro='Starting my app...')
+@shell(prompt='semantic-systems-app > ', intro='Starting the app...')
 def my_app():
-    print('Possible commands: loadontology, printontology')
+    print('Possible commands: ')
+    print("""
+
+[] - denotes an input 
+
+loadontology - loads the provided ontology in the input/graph folder
+printology - prints the ontology.
+activatereasoner - prints the available reasoners and then offers the input to user with numeric variables.
+addclass [] - takes two inputs, the class name and subclass (optional).
+addproperty [] - takes three inputs: domain, property and range.
+addinstance [] - takes two inputs: object name and instance name.
+showqueries - prints all available queries.
+executequery [] - takes one input: an int variable from 1-3
+executeconstructquery - executes the single construct query found in input/query and saves the result to the export folder.
+exportgraph - saves the graph to a user chosen type.
+
+""")
 
 @my_app.command()
 def loadontology():
