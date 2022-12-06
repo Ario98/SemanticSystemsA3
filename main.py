@@ -25,6 +25,13 @@ def activatereasoner():
     print("Reasoner {} activated.".format(reasoner))
 
 @my_app.command()
+@click.argument('name', type=str)
+@click.argument('subclass', type=str, required=False)
+def addclass(name, subclass):
+    rdf.add_class(name, subclass)
+    print('Class {} added.'.format(name))
+
+@my_app.command()
 def showqueries():
     rdf.show_queries()
     print("Showing query.")

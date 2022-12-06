@@ -1,5 +1,5 @@
 from rdflib import Graph, URIRef, BNode, Literal
-from rdflib.namespace import FOAF, RDF
+from rdflib.namespace import FOAF, RDF, OWL, RDFS
 import pprint
 import owlrl
 import os
@@ -44,7 +44,6 @@ class rdf_module:
             for row in result:
                 print(row)
 
-
     def export_graph(self, export_type):
         self.export_type = export_type
 
@@ -55,3 +54,16 @@ class rdf_module:
             self.g.serialize(format="turtle", destination= "export/export.ttl")
         else:
             print('Invalid input.')
+
+    def add_class(self, name, subclass):
+        self.name = name
+        self.subclass = subclass
+        self.URIname = URIRef("http://semantics/id/ns/example/film#" + self.name)
+    
+        if self.subclass is None:
+            self.g.add((self.URIname, RDF.type, OWL.Class))
+        else:
+            self.URIsubclass = URIRef("http://semantics.id/ns/example/film#" + self.subclass)
+            self.g.add((self.URIname, RDFS.subClassOf, self.URIsubclass))
+
+        self.g.add((self.URIname, RDFS.label, Literal(self.name)))
