@@ -18,9 +18,11 @@ def printontology():
 
 @my_app.command()
 def activatereasoner():
+    print('1. RDFS_Semantics')
+    print('2. RDFS_OWLRL_Semantics')
     reasoner = input("Enter reasoner:")
     rdf.activate_reasoner(reasoner)
-    print("Reasoner activated.")
+    print("Reasoner {} activated.".format(reasoner))
 
 @my_app.command()
 def showqueries():
@@ -33,8 +35,11 @@ def executequeries():
 
 @my_app.command()
 def exportgraph():
+    print('1. XML')
+    print('2. Turtle')
     export_type = input("Enter export type:")
     rdf.export_graph(export_type)
+    print("Export type {} finished.".format(export_type))
 
 if __name__ == '__main__':
     rdf = rdf_module()

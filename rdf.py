@@ -21,16 +21,14 @@ class rdf_module:
             print(stmt)
 
     def activate_reasoner(self, reasoner):
-        # -- TODO: Allow the user to pick the reasoner.
         self.reasoner = reasoner
 
-        print(self.reasoner)
-
-        # -- load ontology with deductive closure - RDFS only
-        owlrl.DeductiveClosure(owlrl.RDFS_Semantics).expand(self.g)
-
-        # -- load ontology with deductive closure - OWL2-RL + RDFS
-        # owlrl.DeductiveClosure(owlrl.RDFS_OWLRL_Semantics).expand(g)
+        if self.reasoner == '1':
+            owlrl.DeductiveClosure(owlrl.RDFS_Semantics).expand(self.g)
+        elif self.reasoner == '2':
+            owlrl.DeductiveClosure(owlrl.RDFS_OWLRL_Semantics).expand(self.g)
+        else:
+            print('Invalid input.')
 
     def show_queries(self):
         # -- QUERIES
@@ -49,5 +47,11 @@ class rdf_module:
 
     def export_graph(self, export_type):
         self.export_type = export_type
-        # -- TODO: Allow the user to pick the export file.
-        self.g.serialize(format="turtle", destination="export/export.ttl")
+
+        if self.export_type == '1':
+            self.g.serialize(format="pretty-xml", destination="export/export.xml")
+            return
+        elif self.export_type == '2':
+            self.g.serialize(format="turtle", destination= "export/export.ttl")
+        else:
+            print('Invalid input.')
