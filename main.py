@@ -19,6 +19,7 @@ showqueries - prints all available queries.
 executequery [] - takes one input: an int variable from 1-3
 executeconstructquery - executes the single construct query found in input/query and saves the result to the export folder.
 exportgraph - saves the graph to a user chosen type.
+exit - exits the app.
 
 """)
 
